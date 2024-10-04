@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://567outvh8jng"]
+
+[ext_resource type="Script" path="res://Player.cs" id="1_olild"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_horr4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_n4bd5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kexb8"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_el6pv"]
+size = Vector3(101, 1, 101)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lnsa4"]
+
+[sub_resource type="Sky" id="Sky_5jo5v"]
+sky_material = SubResource("ProceduralSkyMaterial_lnsa4")
+
+[sub_resource type="Environment" id="Environment_74nb7"]
+background_mode = 2
+sky = SubResource("Sky_5jo5v")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52211, 0)
+script = ExtResource("1_olild")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.481702, -0.504529)
+current = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_horr4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_n4bd5")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_kexb8")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_el6pv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_74nb7")
