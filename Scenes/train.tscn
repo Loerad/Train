@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://567outvh8jng"]
 
-[ext_resource type="Script" path="res://Player.cs" id="1_olild"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_olild"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_horr4"]
 
@@ -23,7 +23,7 @@ sky = SubResource("Sky_5jo5v")
 ambient_light_source = 3
 reflected_light_source = 2
 
-[node name="Node3D" type="Node3D"]
+[node name="Main" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52211, 0)
