@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://567outvh8jng"]
+[gd_scene load_steps=16 format=3 uid="uid://567outvh8jng"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ko6wp"]
 [ext_resource type="Texture2D" uid="uid://b1vyyaiv2kwnx" path="res://Addons/kenney_prototype_textures/dark/texture_13.png" id="2_32hm0"]
+[ext_resource type="Script" path="res://Scripts/Train.cs" id="3_87a6n"]
 [ext_resource type="Texture2D" uid="uid://d1wcat80rwonr" path="res://Addons/kenney_prototype_textures/light/texture_12.png" id="3_nh7e3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_horr4"]
@@ -14,10 +15,10 @@ uv1_scale = Vector3(12, 10, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_la8au"]
 material = SubResource("StandardMaterial3D_wc0er")
-size = Vector3(100, 1, 100)
+size = Vector3(500, 1, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dr853"]
-size = Vector3(101, 1, 101)
+size = Vector3(500, 1, 500)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xdleb"]
 
@@ -30,7 +31,8 @@ sky = SubResource("Sky_5jo5v")
 ambient_light_source = 3
 reflected_light_source = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4yl1n"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ag7dh"]
+size = Vector3(15, 5, 5.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4627k"]
 albedo_texture = ExtResource("3_nh7e3")
@@ -43,7 +45,7 @@ size = Vector3(15, 5, 5.5)
 [node name="Main" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.999999, 0, 0.00151844, 0, 1, 0, -0.00151844, 0, 0.999999, 0, 1.52211, 0)
+transform = Transform3D(0.999999, 0, 0.00151844, 0, 1, 0, -0.00151844, 0, 0.999999, 0, 7.87704, 0)
 script = ExtResource("1_ko6wp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -58,7 +60,7 @@ transform = Transform3D(0.999735, 0, 0.0230014, 0, 1, 0, -0.0230014, 0, 0.999735
 current = true
 
 [node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 214.391, -1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_la8au")
@@ -77,10 +79,14 @@ shadow_enabled = true
 environment = SubResource("Environment_8d3py")
 
 [node name="Train" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("3_87a6n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Train"]
-shape = SubResource("BoxShape3D_4yl1n")
+shape = SubResource("BoxShape3D_ag7dh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Train"]
 mesh = SubResource("BoxMesh_dh3q1")
