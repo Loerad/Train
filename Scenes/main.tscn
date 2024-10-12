@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://567outvh8jng"]
+[gd_scene load_steps=11 format=3 uid="uid://567outvh8jng"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ko6wp"]
+[ext_resource type="Texture2D" uid="uid://b2yxgb5xrk60b" path="res://Addons/kenney_prototype_textures/dark/texture_01.png" id="2_skwj7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_horr4"]
 
@@ -17,6 +18,10 @@ sky = SubResource("Sky_5jo5v")
 ambient_light_source = 3
 reflected_light_source = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wc0er"]
+albedo_texture = ExtResource("2_skwj7")
+uv1_scale = Vector3(10, 10, 10)
+
 [sub_resource type="BoxMesh" id="BoxMesh_la8au"]
 size = Vector3(100, 1, 100)
 
@@ -26,12 +31,8 @@ size = Vector3(101, 1, 101)
 [node name="Main" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52211, 0)
+transform = Transform3D(0.999999, 0, 0.00151844, 0, 1, 0, -0.00151844, 0, 0.999999, 0, 1.52211, 0)
 script = ExtResource("1_ko6wp")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.481702, -0.515412)
-current = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_horr4")
@@ -40,6 +41,10 @@ shape = SubResource("CapsuleShape3D_horr4")
 mesh = SubResource("CapsuleMesh_n4bd5")
 skeleton = NodePath("../CollisionShape3D")
 
+[node name="Camera3D" type="Camera3D" parent="Player/MeshInstance3D"]
+transform = Transform3D(0.999735, 0, 0.0230014, 0, 1, 0, -0.0230014, 0, 0.999735, -5.82077e-11, 0.481702, -0.515412)
+current = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8d3py")
 
@@ -47,6 +52,7 @@ environment = SubResource("Environment_8d3py")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+material_override = SubResource("StandardMaterial3D_wc0er")
 mesh = SubResource("BoxMesh_la8au")
 skeleton = NodePath("")
 
