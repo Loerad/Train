@@ -11,9 +11,9 @@ public partial class Player : CharacterBody3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		cam = GetChild(0) as Camera3D;
-		body = GetChild(2) as MeshInstance3D;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		body = GetChild(1) as MeshInstance3D;
+		cam = body.GetChild(0) as Camera3D;
 	}
 
 	public override void _Process(double delta)
@@ -28,7 +28,7 @@ public partial class Player : CharacterBody3D
     {
 		if (@event is InputEventMouseMotion mouseMotion && Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
-			body.RotateY(mouseMotion.Relative.X * lookSensitivity);
+			body.RotateY(-mouseMotion.Relative.X * lookSensitivity);
 			cam.RotateX(-mouseMotion.Relative.Y * lookSensitivity);
 			cam.Rotation = Rotation with { X = Math.Clamp(cam.Rotation.X, Mathf.DegToRad(-80) , Mathf.DegToRad(80)) }; //https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_basics.html#common-pitfalls
 		}
@@ -52,7 +52,7 @@ public partial class Player : CharacterBody3D
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 inputDir = Input.GetVector("Left", "Right", "Forward", "Backwards");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		Vector3 direction = (body.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
 		{
 			velocity.X = direction.X * SPEED;
