@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://567outvh8jng"]
+[gd_scene load_steps=4 format=3 uid="uid://567outvh8jng"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_olild"]
 
@@ -6,28 +6,7 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_n4bd5"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_kexb8"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_el6pv"]
-size = Vector3(101, 1, 101)
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lnsa4"]
-
-[sub_resource type="Sky" id="Sky_5jo5v"]
-sky_material = SubResource("ProceduralSkyMaterial_lnsa4")
-
-[sub_resource type="Environment" id="Environment_74nb7"]
-background_mode = 2
-sky = SubResource("Sky_5jo5v")
-ambient_light_source = 3
-reflected_light_source = 2
-
-[node name="Main" type="Node3D"]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
+[node name="PlayerRoot" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52211, 0)
@@ -43,16 +22,3 @@ shape = SubResource("CapsuleShape3D_horr4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
 mesh = SubResource("CapsuleMesh_n4bd5")
 skeleton = NodePath("../CollisionShape3D")
-
-[node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("BoxMesh_kexb8")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("BoxShape3D_el6pv")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_74nb7")
