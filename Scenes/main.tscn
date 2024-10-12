@@ -1,11 +1,21 @@
 [gd_scene load_steps=11 format=3 uid="uid://567outvh8jng"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ko6wp"]
-[ext_resource type="Texture2D" uid="uid://b2yxgb5xrk60b" path="res://Addons/kenney_prototype_textures/dark/texture_01.png" id="2_skwj7"]
+[ext_resource type="Texture2D" uid="uid://b60dytn8e3m8f" path="res://Addons/kenney_prototype_textures/dark/texture_08.png" id="2_4gx1u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_horr4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_n4bd5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wc0er"]
+albedo_texture = ExtResource("2_4gx1u")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_la8au"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dr853"]
+size = Vector3(101, 1, 101)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xdleb"]
 
@@ -17,16 +27,6 @@ background_mode = 2
 sky = SubResource("Sky_5jo5v")
 ambient_light_source = 3
 reflected_light_source = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wc0er"]
-albedo_texture = ExtResource("2_skwj7")
-uv1_scale = Vector3(10, 10, 10)
-
-[sub_resource type="BoxMesh" id="BoxMesh_la8au"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dr853"]
-size = Vector3(101, 1, 101)
 
 [node name="Main" type="Node3D"]
 
@@ -45,9 +45,6 @@ skeleton = NodePath("../CollisionShape3D")
 transform = Transform3D(0.999735, 0, 0.0230014, 0, 1, 0, -0.0230014, 0, 0.999735, -5.82077e-11, 0.481702, -0.515412)
 current = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_8d3py")
-
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
@@ -59,6 +56,11 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_dr853")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+[node name="Lighting" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource("Environment_8d3py")
