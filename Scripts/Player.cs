@@ -25,16 +25,16 @@ public partial class Player : CharacterBody3D
 	}
 	//handles mouse movement
 	public override void _Input(InputEvent @event)
-    {
+	{
 		if (@event is InputEventMouseMotion mouseMotion && Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
 			body.RotateY(-mouseMotion.Relative.X * lookSensitivity);
 			cam.RotateX(-mouseMotion.Relative.Y * lookSensitivity);
 			cam.Rotation = Rotation with { X = Math.Clamp(cam.Rotation.X, Mathf.DegToRad(-66.5f) , Mathf.DegToRad(63.4f)) }; //https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_basics.html#common-pitfalls
 		}
-    }
+	}
 	//base godot movement script
-    public override void _PhysicsProcess(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
 
@@ -52,7 +52,7 @@ public partial class Player : CharacterBody3D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 inputDir = Input.GetVector("Left", "Right", "Forward", "Backwards");
+		Vector2 inputDir = Input.GetVector("Left", "Right", "Forward", "Backward");
 		Vector3 direction = (body.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized(); //apart from acting on the mesh insead of the origin
 		if (direction != Vector3.Zero)
 		{
@@ -64,7 +64,7 @@ public partial class Player : CharacterBody3D
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, SPEED);
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, SPEED);
 		}
-
+		
 		Velocity = velocity;
 		MoveAndSlide();
 		
