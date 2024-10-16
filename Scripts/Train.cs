@@ -47,7 +47,8 @@ public partial class Train : RigidBody3D
 				angle -= 0.001f;
 			}
 		}
-		ApplyForce(velocity * Transform.Basis.X);
+
+		ApplyCentralForce(velocity * Transform.Basis.X);
 		RotateY(Mathf.Clamp(angle, -MaxAngle(velocity), MaxAngle(velocity)));
 		
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://567outvh8jng"]
+[gd_scene load_steps=17 format=3 uid="uid://567outvh8jng"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ko6wp"]
 [ext_resource type="Texture2D" uid="uid://b1vyyaiv2kwnx" path="res://Addons/kenney_prototype_textures/dark/texture_13.png" id="2_32hm0"]
@@ -42,6 +42,13 @@ uv1_scale = Vector3(1.5, 0.5, 0.55)
 material = SubResource("StandardMaterial3D_4627k")
 size = Vector3(15, 5, 5.5)
 
+[sub_resource type="Curve3D" id="Curve3D_i0g5d"]
+_data = {
+"points": PackedVector3Array(25.8582, 0, 69.7047, -25.8582, 0, -69.7047, -9.72585, 0, -127.452, -84.3759, 0, 15.1649, 84.3759, 0, -15.1649, 95.302, 0, -224.009, -66.6658, 0, -3.6264, 66.6658, 0, 3.6264, 267.337, 0, -220.884, -69.9872, 0, -53.2981, 69.9872, 0, 53.2981, 404.476, 0, -166.671, 0, 0, 0, 0, 0, 0, 418.716, 0, 72.8913, 78.3556, 0, -75.926, -78.3556, 0, 75.926, 328.873, 0, 196.161, 45.6447, 0, 17.2708, -45.6447, 0, -17.2708, 17.3665, 0, 216.974, -85.0371, 0, 45.5556, 85.0371, 0, -45.5556, 13.1146, 0, 86.3811, -26.7259, 0, -14.5778, 26.7259, 0, 14.5778, 123.134, 0, 84.0131, -33.6621, 0, 43.5118, 33.6621, 0, -43.5118, 254.242, 0, 76.4159, 67.775, 0, 49.5859, -67.775, 0, -49.5859, 222.657, 0, -68.1472, 58, 0, 76, -58, 0, -76, 27.326, 0, -55.7775),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 12
+
 [node name="Main" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
@@ -79,7 +86,7 @@ shadow_enabled = true
 environment = SubResource("Environment_8d3py")
 
 [node name="Train" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+transform = Transform3D(0.998555, 0, -0.0537303, 0, 1, 0, 0.0537303, 0, 0.998555, 0, 4, 0)
 gravity_scale = 0.0
 continuous_cd = true
 contact_monitor = true
@@ -92,3 +99,49 @@ shape = SubResource("BoxShape3D_ag7dh")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Train"]
 mesh = SubResource("BoxMesh_dh3q1")
 skeleton = NodePath("../CollisionShape3D")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3988, 0, 0)
+curve = SubResource("Curve3D_i0g5d")
+
+[node name="Track" type="CSGPolygon3D" parent="Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.301, 0, 0)
+polygon = PackedVector2Array(-4, 0, -4, 0.1, 1, 0.1, 1, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+
+[node name="RailLeft" type="CSGPolygon3D" parent="Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.301, 0, 0)
+polygon = PackedVector2Array(-3.5, 0, -3.5, 0.2, -3.2, 0.2, -3.2, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+
+[node name="RailRight" type="CSGPolygon3D" parent="Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.301, 0, 0)
+polygon = PackedVector2Array(0.5, 0, 0.5, 0.2, 0.3, 0.2, 0.3, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
