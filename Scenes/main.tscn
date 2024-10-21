@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://567outvh8jng"]
+[gd_scene load_steps=18 format=3 uid="uid://567outvh8jng"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ko6wp"]
 [ext_resource type="Texture2D" uid="uid://b1vyyaiv2kwnx" path="res://Addons/kenney_prototype_textures/dark/texture_13.png" id="2_32hm0"]
@@ -48,6 +48,8 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 12
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dqopk"]
 
 [node name="Main" type="Node3D"]
 
@@ -145,3 +147,23 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = true
+
+[node name="Bogie" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.937566, 0, 0.347807, 0, 1, 0, -0.347807, 0, 0.937566, -9.72585, 0, -127.452)
+rotation_mode = 4
+
+[node name="Wheel" type="MeshInstance3D" parent="Path3D/Bogie"]
+transform = Transform3D(-4.37114e-08, -0.1, 0, 1, -4.37114e-09, 0, 0, 0, 1, -0.374996, 0.705855, -7.62939e-06)
+mesh = SubResource("CylinderMesh_dqopk")
+
+[node name="Wheel2" type="MeshInstance3D" parent="Path3D/Bogie"]
+transform = Transform3D(-4.37114e-08, -0.1, 0, 1, -4.37114e-09, 0, 0, 0, 1, -4.00264, 0.705855, -7.7486e-06)
+mesh = SubResource("CylinderMesh_dqopk")
+
+[node name="Wheel3" type="MeshInstance3D" parent="Path3D/Bogie"]
+transform = Transform3D(-4.37114e-08, -0.1, 0, 1, -4.37114e-09, 0, 0, 0, 1, -0.374996, 0.705855, 4.13677)
+mesh = SubResource("CylinderMesh_dqopk")
+
+[node name="Wheel4" type="MeshInstance3D" parent="Path3D/Bogie"]
+transform = Transform3D(-4.37114e-08, -0.1, 0, 1, -4.37114e-09, 0, 0, 0, 1, -4.00264, 0.705855, 4.13677)
+mesh = SubResource("CylinderMesh_dqopk")
