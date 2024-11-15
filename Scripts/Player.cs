@@ -20,6 +20,7 @@ public partial class Player : CharacterBody3D
 	{
 		if (Input.IsActionJustPressed("Quit")) //change to activate the pause menu
 		{
+			Save.SaveGame();
 			GetTree().Quit();
 		}
 	}

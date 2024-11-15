@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://567outvh8jng"]
+[gd_scene load_steps=22 format=3 uid="uid://567outvh8jng"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ko6wp"]
 [ext_resource type="Texture2D" uid="uid://b1vyyaiv2kwnx" path="res://Addons/kenney_prototype_textures/dark/texture_13.png" id="2_32hm0"]
+[ext_resource type="ArrayMesh" uid="uid://d18j3ek1yneo7" path="res://Models/KragRifle.obj" id="2_n0rsh"]
 [ext_resource type="Script" path="res://Scripts/Train.cs" id="3_87a6n"]
 [ext_resource type="Texture2D" uid="uid://d1wcat80rwonr" path="res://Addons/kenney_prototype_textures/light/texture_12.png" id="3_nh7e3"]
 
@@ -51,6 +52,13 @@ point_count = 12
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dqopk"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xdvod"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f7ka5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pssac"]
+albedo_color = Color(1, 0, 0, 1)
+
 [node name="Main" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
@@ -67,6 +75,13 @@ skeleton = NodePath("../CollisionShape3D")
 [node name="Camera3D" type="Camera3D" parent="Player/MeshInstance3D"]
 transform = Transform3D(0.999735, 0, 0.0230014, 0, 1, 0, -0.0230014, 0, 0.999735, -5.82077e-11, 0.481702, -0.515412)
 current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/MeshInstance3D/Camera3D"]
+transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0.259398, -0.437667, -0.408583)
+mesh = ExtResource("2_n0rsh")
+
+[node name="Node3D" type="Node3D" parent="Player/MeshInstance3D/Camera3D/MeshInstance3D"]
+transform = Transform3D(4.34652, 0, -0.106606, 0, 4.34783, 0, 0.106606, 0, 4.34652, 0.00151324, 1.41384, -4.04121)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 214.391, -1, 0)
@@ -88,7 +103,7 @@ shadow_enabled = true
 environment = SubResource("Environment_8d3py")
 
 [node name="Train" type="RigidBody3D" parent="."]
-transform = Transform3D(0.998555, 0, -0.0537303, 0, 1, 0, 0.0537303, 0, 0.998555, 0, 4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.085, 4, 0)
 gravity_scale = 0.0
 continuous_cd = true
 contact_monitor = true
@@ -167,3 +182,13 @@ mesh = SubResource("CylinderMesh_dqopk")
 [node name="Wheel4" type="MeshInstance3D" parent="Path3D/Bogie"]
 transform = Transform3D(-4.37114e-08, -0.1, 0, 1, -4.37114e-09, 0, 0, 0, 1, -4.00264, 0.705855, 4.13677)
 mesh = SubResource("CylinderMesh_dqopk")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_xdvod")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7709, 0, 0)
+mesh = SubResource("CapsuleMesh_f7ka5")
+surface_material_override/0 = SubResource("StandardMaterial3D_pssac")
